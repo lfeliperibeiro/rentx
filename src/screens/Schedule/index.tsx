@@ -1,0 +1,49 @@
+import React from "react";
+import { useTheme } from "styled-components";
+import {
+  Container,
+  Header,
+  Title,
+  RentalPeriod,
+  DateInfo,
+  DateValue,
+  DateTitle,
+  DateValueText,
+} from "./styles";
+import { BackButton } from "../../components/BackButton";
+import ArrowSvg from "../../assets/arrow.svg";
+import { StatusBar } from "react-native";
+
+export function Schedule() {
+  const theme = useTheme();
+  return (
+    <Container>
+      <StatusBar
+        barStyle={"light-content"}
+        translucent
+        backgroundColor={"transparent"}
+      />
+      <Header>
+        <BackButton onPress={() => {}} color={theme.colors.shape} />
+        <Title>
+          Escolha uma {"\n"}
+          data de início e {"\n"}
+          fim do aluguel
+        </Title>
+        <RentalPeriod>
+          <DateInfo>
+            <DateTitle>DE</DateTitle>
+            <DateValueText>02/08/2021</DateValueText>
+            <DateValue selected={false} />
+          </DateInfo>
+          <ArrowSvg />
+          <DateInfo>
+            <DateTitle>ATÉ</DateTitle>
+            <DateValueText>12/08/2021</DateValueText>
+            <DateValue selected={false} />
+          </DateInfo>
+        </RentalPeriod>
+      </Header>
+    </Container>
+  );
+}
