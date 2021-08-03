@@ -9,10 +9,13 @@ import {
   DateValue,
   DateTitle,
   DateValueText,
+  Content,
+  Footer,
 } from "./styles";
 import { BackButton } from "../../components/BackButton";
 import ArrowSvg from "../../assets/arrow.svg";
 import { StatusBar } from "react-native";
+import { Button } from "../../components/Button";
 
 export function Schedule() {
   const theme = useTheme();
@@ -44,6 +47,10 @@ export function Schedule() {
           </DateInfo>
         </RentalPeriod>
       </Header>
+      <Content></Content>
+      <Footer>
+        <Button title={"confirmar"} />
+      </Footer>
     </Container>
   );
 }
