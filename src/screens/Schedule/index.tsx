@@ -16,6 +16,7 @@ import { BackButton } from "../../components/BackButton";
 import ArrowSvg from "../../assets/arrow.svg";
 import { StatusBar } from "react-native";
 import { Button } from "../../components/Button";
+import { Calendar } from "../../components/Calendar";
 
 export function Schedule() {
   const theme = useTheme();
@@ -47,7 +48,9 @@ export function Schedule() {
           </DateInfo>
         </RentalPeriod>
       </Header>
-      <Content></Content>
+      <Content>
+        <Calendar />
+      </Content>
       <Footer>
         <Button title={"confirmar"} />
       </Footer>
