@@ -1,15 +1,17 @@
 import React from "react";
 import { Platform, SafeAreaView, StatusBar } from "react-native";
 
-import { Container, Header, TotalCars, HeaderContent } from "./styles";
+import { Container, Header, TotalCars, HeaderContent, CarList } from "./styles";
 
 import Logo from "../../assets/logo.svg";
 import { RFValue } from "react-native-responsive-fontsize";
 import theme from "../../styles/theme";
 import { Car } from "../../components/Car";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 
 export function Home() {
-  const carDataOne = {
+  const navigation: NavigationProp<any> = useNavigation();
+  const carData = {
     brand: "Audi",
     name: "RS 5 Coupé",
     rent: {
@@ -20,16 +22,9 @@ export function Home() {
       "https://www.motortrend.com/uploads/sites/10/2018/05/2018-audi-rs5-4wd-coupe-angular-front.png?fit=around%7C875:492.1875",
   };
 
-  const carDataTwo = {
-    brand: "Porshe",
-    name: "Huracan",
-    rent: {
-      period: "Ao dia",
-      price: 340,
-    },
-    thumbnail:
-      "https://www.motortrend.com/uploads/sites/10/2018/05/2018-audi-rs5-4wd-coupe-angular-front.png?fit=around%7C875:492.1875",
-  };
+  function handleCarDetails() {
+    navigation.navigate("CarDetails");
+  }
 
   return (
     <Container>
@@ -47,8 +42,11 @@ export function Home() {
           <TotalCars>Total de 12 carros</TotalCars>
         </HeaderContent>
       </Header>
-      <Car data={carDataOne} />
-      <Car data={carDataTwo} />
+      <CarList
+        data={[1, 2, 3, 4, 5, 6]}
+        keyExtractor={(item) => String(item)}
+        renderItem={() => <Car data={carData} onPress={handleCarDetails} />}
+      />
     </Container>
   );
 }

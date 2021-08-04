@@ -29,8 +29,15 @@ import { StatusBar } from "react-native";
 import { ImageSlider } from "../../components/ImageSlider";
 import { Accessory } from "../../components/Accessory";
 import { Button } from "../../components/Button";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 
 export function CarDetails() {
+  const navigation: NavigationProp<any> = useNavigation();
+
+  function handleConfirmRental() {
+    navigation.navigate("Schedule");
+  }
+
   return (
     <Container>
       <StatusBar
@@ -75,7 +82,10 @@ export function CarDetails() {
       </Content>
 
       <Footer>
-        <Button title={"Confirmar"} />
+        <Button
+          title={"Escolher período do aluguel"}
+          onPress={handleConfirmRental}
+        />
       </Footer>
     </Container>
   );
