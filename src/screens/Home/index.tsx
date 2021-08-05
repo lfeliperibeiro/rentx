@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Platform, SafeAreaView, StatusBar } from "react-native";
+import api from "../../services/api";
+import { CarDTO } from "../../dtos/carDTO";
 
 import { Container, Header, TotalCars, HeaderContent, CarList } from "./styles";
 
@@ -8,23 +10,29 @@ import { RFValue } from "react-native-responsive-fontsize";
 import theme from "../../styles/theme";
 import { Car } from "../../components/Car";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
+import { Load } from "../../components/Load";
 
 export function Home() {
+  const [cars, setCars] = useState<CarDTO[]>([]);
+  const [loading, setLoading] = useState(true);
   const navigation: NavigationProp<any> = useNavigation();
-  const carData = {
-    brand: "Audi",
-    name: "RS 5 Coupé",
-    rent: {
-      period: "Ao dia",
-      price: 120,
-    },
-    thumbnail:
-      "https://www.motortrend.com/uploads/sites/10/2018/05/2018-audi-rs5-4wd-coupe-angular-front.png?fit=around%7C875:492.1875",
-  };
-
   function handleCarDetails() {
     navigation.navigate("CarDetails");
   }
+
+  useEffect(() => {
+    async function fetchCar() {
+      try {
+        const response = await api.get("/cars");
+        setCars(response.data);
+      } catch (e) {
+        console.log(e);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchCar().then();
+  }, []);
 
   return (
     <Container>
@@ -42,11 +50,17 @@ export function Home() {
           <TotalCars>Total de 12 carros</TotalCars>
         </HeaderContent>
       </Header>
-      <CarList
-        data={[1, 2, 3, 4, 5, 6]}
-        keyExtractor={(item) => String(item)}
-        renderItem={() => <Car data={carData} onPress={handleCarDetails} />}
-      />
+      {loading ? (
+        <Load />
+      ) : (
+        <CarList
+          data={cars}
+          keyExtractor={(item) => String(item.id)}
+          renderItem={({ item }) => (
+            <Car data={item} onPress={handleCarDetails} />
+          )}
+        />
+      )}
     </Container>
   );
 }
