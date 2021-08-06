@@ -22,7 +22,7 @@ interface MarketDateProps {
 }
 
 interface DayProps {
-  dayString: string;
+  dateString: string;
   day: number;
   month: number;
   timestamp: number;

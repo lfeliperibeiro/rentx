@@ -16,11 +16,11 @@ export function generateInterval(start: DayProps, end: DayProps) {
       ...interval,
       [date]: {
         color:
-          start.dayString === date || end.dayString === date
+          start.dateString === date || end.dateString === date
             ? theme.colors.main
             : theme.colors.main_light,
         textColor:
-          start.dayString === date || end.dayString === date
+          start.dateString === date || end.dateString === date
             ? theme.colors.main_light
             : theme.colors.main,
       },
