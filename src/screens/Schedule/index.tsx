@@ -14,7 +14,7 @@ import {
 } from "./styles";
 import { BackButton } from "../../components/BackButton";
 import ArrowSvg from "../../assets/arrow.svg";
-import { Alert, StatusBar } from "react-native";
+import { StatusBar } from "react-native";
 import { Button } from "../../components/Button";
 import {
   Calendar,
@@ -54,9 +54,6 @@ export function Schedule() {
   const { car } = route.params as Params;
 
   function handleConfirmRental() {
-    if (!rentalPeriod.startFormatted || !rentalPeriod.endFormatted) {
-      Alert.alert("Selecione o intervalo para alugar");
-    }
     navigation.navigate("SchedulingDetails", {
       car,
       dates: Object.keys(markedDates),
@@ -122,7 +119,11 @@ export function Schedule() {
         <Calendar markedDates={markedDates} onDayPress={handleChangeDate} />
       </Content>
       <Footer>
-        <Button title={"confirmar"} onPress={handleConfirmRental} />
+        <Button
+          title={"Confirmar"}
+          onPress={handleConfirmRental}
+          enabled={!!rentalPeriod.startFormatted}
+        />
       </Footer>
     </Container>
   );
