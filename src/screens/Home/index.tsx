@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Platform, SafeAreaView, StatusBar, StyleSheet } from "react-native";
+import {
+  BackHandler,
+  Platform,
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+} from "react-native";
 import api from "../../services/api";
 import { CarDTO } from "../../dtos/carDTO";
 import { Ionicons } from "@expo/vector-icons";
@@ -78,6 +84,12 @@ export function Home() {
     fetchCar().then();
   }, []);
 
+  useEffect(() => {
+    BackHandler.addEventListener("hardwareBackPress", () => {
+      return true;
+    });
+  }, []);
+
   return (
     <Container>
       {Platform.OS === "ios" ? (
@@ -91,7 +103,7 @@ export function Home() {
       <Header>
         <HeaderContent>
           <Logo width={RFValue(108)} height={RFValue(12)} />
-          <TotalCars>Total de {cars.length} carros</TotalCars>
+          {!loading && <TotalCars>Total de {cars.length} carros</TotalCars>}
         </HeaderContent>
       </Header>
       {loading ? (
