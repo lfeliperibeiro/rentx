@@ -79,7 +79,7 @@ export function MyCars() {
           </Appointments>
           <FlatList
             data={cars}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item) => item.id.toString()}
             showsVerticalScrollIndicator={false}
             renderItem={({ item }) => (
               <CarWrapper>
