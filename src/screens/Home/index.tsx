@@ -26,8 +26,9 @@ import Logo from "../../assets/logo.svg";
 import { RFValue } from "react-native-responsive-fontsize";
 import { Car } from "../../components/Car";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import { Load } from "../../components/Load";
+
 import { useTheme } from "styled-components";
+import { LoadAnimation } from "../../components/LoadAnimation";
 
 export function Home() {
   const theme = useTheme();
@@ -107,7 +108,7 @@ export function Home() {
         </HeaderContent>
       </Header>
       {loading ? (
-        <Load />
+        <LoadAnimation />
       ) : (
         <CarList
           data={cars}
